@@ -2,7 +2,7 @@
 
 ## Modelo entidad/relación. Farmacia
 
-![](ADBD2FINAL.drawio.png)
+![](ADBD2FINAL2.drawio.png)
 
 
 ### Laboratorio
