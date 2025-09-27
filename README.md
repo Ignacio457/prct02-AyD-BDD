@@ -2,7 +2,12 @@
 
 ## Modelo entidad/relación. Farmacia
 
+![](ADBD2FINAL.drawio.png)
+
+
 ### Laboratorio
+  Representa a las empresas que producen o distribuyen medicamentos.
+
 - **Código_lab** *(PK, entero)* → Identificador único del laboratorio.  
   Ej: `101`, `202`.
 - **Nombre** *(texto)* → Nombre comercial del laboratorio.  
@@ -16,9 +21,10 @@
 - **Contacto** *(texto)* → Persona de contacto.  
   Ej: `Dr. Juan Pérez`.
 
----
 
 ### Medicamento
+  Representa cada medicamento que la farmacia vende y controla.
+  
 - **Código_med** *(PK, entero)* → Identificador único del medicamento.  
   Ej: `M001`, `M105`.
 - **Nombre** *(texto)* → Nombre del medicamento.  
@@ -32,19 +38,22 @@
 - **Receta** *(bool)* → Indica si requiere receta médica.  
   Ej: `Sí`.
 
----
 
 ### Familia
+  Clasificación de medicamentos.
+
 - **Código_fam** *(PK, entero)* → Identificador de la familia.  
   Ej: `F01`, `F07`.
 - **Nombre** *(texto)* → Nombre de la familia de medicamentos.  
   Ej: `Analgésicos`, `Antibióticos`.
 - **Descripción** *(texto)* → Breve descripción del tipo de enfermedades que cubre.  
   Ej: `Medicamentos contra el dolor`.
-
----
+- **Receta** *(bool)* → Indica si TIENE receta médica para alún medicamento.  
+  Ej: `Sí`
 
 ### Cliente
+  Representa a los clientes que realizan compras en la farmacia.
+
 - **Código_cli** *(PK, entero)* → Identificador del cliente.  
   Ej: `C001`, `C045`.
 - **Nombre** *(texto)* → Nombre completo.  
@@ -55,23 +64,26 @@
   Ej: `+34 678901234`.
 - **Crédito** *(booleano)* → Indica si el cliente compra con crédito.  
   Ej: `Sí`.
+  
 
----
 
 ### Crédito (debil)
+  Entidad dependiente de Cliente, únicamente para clientes con crédito.
+
 - **Código_cli** *(PK)* → Hereda del cliente.
 - **Datos_bancarios** *(texto)* → IBAN o número de cuenta.  
   Ej: `ES55 5555 5555 5555 5555 5555`.
 - **Fecha** *(fecha)* → Fecha de pago mensual de las compras.  
   Ej: `2025-09-27`.
 
----
-
 ### Compra
-Entidad asociativa entre Cliente y Medicamento.  
+  Entidad asociativa entre Cliente y Medicamento.  
+  
 - **Código_cli** *(PK)* → Cliente que realiza la compra.  
 - **Cod_med** *(PK)* → Medicamento adquirido.  
 - **Fecha_comp** 
+
+---
 
 ## Relaciones definidas
 ###  Produce (Laboratorio – Medicamento)
@@ -95,11 +107,22 @@ Ejemplo: El medicamento Amoxicilina pertenece a la familia de Antibióticos.
 
 Ejemplo: El cliente Juan Pérez compra 2 Ibuprofenos y 1 Paracetamol el 15/09/2025.
 
-4. Posee (Cliente – Crédito)
+### Posee (Cliente – Crédito)
 
 - Un cliente → puede tener 0..1 crédito.
 - Un crédito → está asociado a 1 cliente.
 
 Ejemplo: La cliente Ana posee un unico crédito, con datos bancarios y fecha de pago el 30 de cada mes.
 
+---
+
+## Restricciones semánticas
+
+- Un medicamento pertenece exactamente a una familia.
+
+- Cada medicamento debe estar asociado a un laboratorio.
+
+- Un cliente puede tener como máximo un crédit0.
+
+- El stock de un medicamento nunca debe ser negativo.
 
