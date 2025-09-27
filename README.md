@@ -48,8 +48,7 @@
   Ej: `Analgésicos`, `Antibióticos`.
 - **Descripción** *(texto)* → Breve descripción del tipo de enfermedades que cubre.  
   Ej: `Medicamentos contra el dolor`.
-- **Receta** *(bool)* → Indica si TIENE receta médica para alún medicamento.  
-  Ej: `Sí`
+
 
 ### Cliente
   Representa a los clientes que realizan compras en la farmacia.
